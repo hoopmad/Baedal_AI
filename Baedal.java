@@ -44,7 +44,7 @@ public class Baedal {
 			return 0;
 	}
 
-	// 배달 거리가 멀다에 대한 소속함수 VeryLongDistance 내용은 사다리꼴공식과 같음
+	// 배달 거리가 매우 멀다에 대한 소속함수 VeryLongDistance 내용은 사다리꼴공식과 같음
 	public static double VeryLongDistance(double n) {
 		if (n < 2000) // a=2000
 			return 0;
@@ -81,7 +81,7 @@ public class Baedal {
 		else if (n >= 17500 & n < 27500) // b=17500, c=27500
 			return 1;
 		else if (n >= 27500 & n < 35000) // c=27500, d=35000
-			return (35000 - n) / 12500;
+			return (35000 - n) / 7500;
 		else
 			return 0;
 	}
@@ -92,10 +92,10 @@ public class Baedal {
 			return 0;
 		else if (n >= 30000 & n < 35000) // a=30000, b=35000
 			return (n - 30000) / 5000;
-		else if (n >= 35000 & n < 1000000) // b=35000, c=1000000
+		else if (n >= 35000 & n < 100001) // b=35000, c=100001
 			return 1;
-		else if (n >= 1000000 & n < 1005000) // c=1000000, d=1005000
-			return (1005000 - n) / 5000;
+		else if (n >= 100001 & n < 100001.0001) // c=100001, d=100001.0001
+			return (100001 - n) / 0.0001;
 		else
 			return 0;
 	}
@@ -108,17 +108,23 @@ public class Baedal {
 		double distance;
 		double price;
 		double result = 0;
-		;
+
 		// 배달 거리 입력. 음수가 입력되면 재입력.
 		do {
-			System.out.print("배달 거리를 입력해주세요: ");
+			System.out.print("배달 거리를 입력해주세요(최대 3000m): ");
 			distance = scan.nextDouble();
-		} while (distance < 0);
+			if (distance < 0 || distance > 3000) {
+				System.out.println("3000m 이하의 거리를 입력해주세요.");
+			}
+		} while (distance < 0 || distance > 3000);
 		// 주문 가격 입력. 음수가 입력되면 재입력.
 		do {
-			System.out.print("주문 가격을 입력해주세요: ");
+			System.out.print("주문 가격을 입력해주세요(최대 10만원): ");
 			price = scan.nextDouble();
-		} while (price < 0);
+			if (price < 0 || price > 100000) {
+				System.out.println("10만원 이하의 거리를 입력해주세요.");
+			}
+		} while (price < 0 || price > 100000);
 
 		// 8개의 규칙에 적용해서 전건부 수치화
 		// 배달비: 매우 싸다=1000원, 싸다=2000원, 보통이다=3000원, 비싸다=4000원, 매우 비싸다=5000원)
